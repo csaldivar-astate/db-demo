@@ -28,7 +28,8 @@ async function registerUser(req: Request, res: Response): Promise<void> {
     console.log(newUser);
 
     await sendEmail(email, 'Welcome!', `Thank you for joining my application!`);
-    res.sendStatus(201);
+    // res.sendStatus(201);
+    res.redirect('/login');
   } catch (err) {
     console.error(err);
     const databaseErrorMessage = parseDatabaseError(err);
@@ -41,13 +42,15 @@ async function logIn(req: Request, res: Response): Promise<void> {
 
   const user = await getUserByEmail(email);
   if (!user) {
-    res.sendStatus(404); // 404 Not Found - email doesn't exist
+    // res.sendStatus(404); // 404 Not Found - email doesn't exist
+    res.redirect('/login');
     return;
   }
 
   const { passwordHash } = user;
   if (!(await argon2.verify(passwordHash, password))) {
-    res.sendStatus(404); // 404 Not Found - user with email/pass doesn't exist
+    // res.sendStatus(404); // 404 Not Found - user with email/pass doesn't exist
+    res.redirect('/login');
     return;
   }
 
@@ -61,7 +64,10 @@ async function logIn(req: Request, res: Response): Promise<void> {
   };
   req.session.isLoggedIn = true;
 
-  res.sendStatus(200);
+  // res.sendStatus(200);
+  // res.redirect("/welcome");
+  // res.render('profilePage', { email: user.email });
+  res.redirect(`/users/${user.userId}`);
 }
 
 async function getUserProfileData(req: Request, res: Response): Promise<void> {
@@ -78,7 +84,8 @@ async function getUserProfileData(req: Request, res: Response): Promise<void> {
   // Now update their profile views
   user = await incrementProfileViews(user);
 
-  res.json(user);
+  // res.json(user);
+  res.render('profilePage', { email: user.email, profileViews: user.profileViews });
 }
 
 async function resetProfileViews(req: Request, res: Response): Promise<void> {

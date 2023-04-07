@@ -31,7 +31,12 @@ async function getBook(req: Request, res: Response): Promise<void> {
 }
 
 async function getAllBooks(req: Request, res: Response): Promise<void> {
-  res.status(200).json(await getBooks());
+  // Don't send back the raw data. Instead render it with EJS
+  // res.status(200).json(await getBooks());
+
+  const books = await getBooks();
+
+  res.render('libraryPage', { books });
 }
 
 export { insertBook, getBook, getAllBooks };

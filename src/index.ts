@@ -56,7 +56,7 @@ app.post('/api/books/:bookId/reviews', makeReview);
 app.get('/api/reviews/:reviewId', getReview);
 app.delete('/api/reviews/:reviewId', deleteUserReview);
 
-app.get('/api/books/:bookId', getBook);
+app.get('/books/:bookId', getBook);
 app.get('/books', getAllBooks);
 app.post('/api/books', insertBook);
 

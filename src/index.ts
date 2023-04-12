@@ -52,6 +52,8 @@ app.get('/users/:targetUserId', getUserProfileData);
 app.post('/api/users/:targetUserId/email', updateUserEmail);
 app.get('/api/users/:targetUserId/reviews', getUserReviews);
 
+// The line below is just a stub we will update it it soon
+// app.get('/books/:bookId/writeReview', (req, res) => res.send('write a review')));
 app.post('/api/books/:bookId/reviews', makeReview);
 app.get('/api/reviews/:reviewId', getReview);
 app.delete('/api/reviews/:reviewId', deleteUserReview);
@@ -59,6 +61,7 @@ app.delete('/api/reviews/:reviewId', deleteUserReview);
 app.get('/books/:bookId', getBook);
 app.get('/books', getAllBooks);
 app.post('/api/books', insertBook);
+
 
 app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`);

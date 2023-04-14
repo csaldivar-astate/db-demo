@@ -17,6 +17,7 @@ import {
   getReview,
   getUserReviews,
   deleteUserReview,
+  renderReviewPage,
 } from './controllers/ReviewController';
 import { insertBook, getAllBooks, getBook } from './controllers/BookController';
 
@@ -53,7 +54,7 @@ app.post('/api/users/:targetUserId/email', updateUserEmail);
 app.get('/api/users/:targetUserId/reviews', getUserReviews);
 
 // The line below is just a stub we will update it it soon
-// app.get('/books/:bookId/writeReview', (req, res) => res.send('write a review')));
+app.get('/books/:bookId/writeReview', renderReviewPage);
 app.post('/api/books/:bookId/reviews', makeReview);
 app.get('/api/reviews/:reviewId', getReview);
 app.delete('/api/reviews/:reviewId', deleteUserReview);

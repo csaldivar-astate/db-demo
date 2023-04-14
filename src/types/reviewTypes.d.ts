@@ -6,3 +6,8 @@ type RatingRangeQuery = {
 type ReviewIdParam = {
   reviewId: string;
 };
+
+type BookIdParam = {
+  bookId: string;
+};
+

@@ -9,13 +9,13 @@
 </head>
 
 <body>
-    <h1>Write a review for ???</h1>
+    <h1>Write a review for <%= book.title %></h1>
 
-    <form action="/api/book/???bookId/reviews" method="post">
+    <form action="/api/books/<%= book.bookId %>/reviews" method="post">
         <label for="rating">Rating</label>
         <input id="rating" name="rating" type="">
-        <label for="text">Text</label>
-        <input id="text" name="text" type="text">
+        <label for="reviewText">Text</label>
+        <input id="reviewText" name="reviewText" type="text">
 
         <button>Submit</button>
     </form>

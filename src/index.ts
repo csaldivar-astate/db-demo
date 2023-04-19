@@ -20,6 +20,7 @@ import {
   renderReviewPage,
 } from './controllers/ReviewController';
 import { insertBook, getAllBooks, getBook } from './controllers/BookController';
+import { validateNewUserBody, validateLoginBody } from './validators/authValidator';
 
 const app: Express = express();
 app.set('view engine', 'ejs');
@@ -44,8 +45,8 @@ app.use(
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.post('/api/users', registerUser); // Create an account
-app.post('/api/login', logIn); // Log in to an account
+app.post('/api/users', validateNewUserBody, registerUser); // Create an account
+app.post('/api/login', validateLoginBody, logIn); // Log in to an account
 app.post('/api/users/profileViews/reset', resetProfileViews); // Log in to an account
 
 app.get('/api/users', getAllUserProfiles);
